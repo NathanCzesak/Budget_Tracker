@@ -29,9 +29,9 @@ public class BucketController {
         return bucketService.updateBucket(id, bucket);
     }
 
-    @DeleteMapping()
-    public void deleteBucket(@RequestBody Bucket bucket) {
-        bucketService.deleteBucketById(bucket.getId());
+    @DeleteMapping("/{id}")
+    public void deleteBucket(@PathVariable Long id) {
+        bucketService.deleteBucketById(id);
     }
 
 }

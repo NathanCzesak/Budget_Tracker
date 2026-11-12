@@ -32,8 +32,19 @@ public class BucketService {
             throw new EntityNotFoundException("Bucket with id " + id + " not found");
         }
         Bucket bucketToUpdate = bucketRepository.findById(id).get();
-        bucketToUpdate.setBucketName(bucket.getBucketName());
-        bucketToUpdate.setCurrentBalance(bucket.getCurrentBalance());
+
+        if(bucket.getBucketName() == null || bucket.getBucketName().isBlank()){
+            bucketToUpdate.setBucketName(bucketRepository.findById(id).get().getBucketName());
+        } else{
+            bucketToUpdate.setBucketName(bucket.getBucketName());
+        }
+
+        if(bucket.getCurrentBalance() == null){
+            bucketToUpdate.setCurrentBalance(bucketRepository.findById(id).get().getCurrentBalance());
+        } else{
+            bucketToUpdate.setCurrentBalance(bucket.getCurrentBalance());
+        }
+
         return bucketRepository.save(bucketToUpdate);
     }
 
