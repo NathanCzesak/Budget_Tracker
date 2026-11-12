@@ -1,4 +1,4 @@
-package practice.budget_tracker;
+package practice.budget_tracker.bucket;
 
 import org.springframework.web.bind.annotation.*;
 

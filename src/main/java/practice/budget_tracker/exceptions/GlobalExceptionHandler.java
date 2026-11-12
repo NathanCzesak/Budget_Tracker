@@ -1,4 +1,4 @@
-package practice.budget_tracker;
+package practice.budget_tracker.exceptions;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -21,4 +21,13 @@ public class GlobalExceptionHandler {
         );
     }
 
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<Map<String, Object>> handleException(BadRequestException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                Map.of(
+                        "status", 400,
+                        "message", e.getMessage()
+                )
+        );
+    }
 }
