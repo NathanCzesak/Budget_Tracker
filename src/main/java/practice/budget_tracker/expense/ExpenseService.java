@@ -2,6 +2,7 @@ package practice.budget_tracker.expense;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
+import practice.budget_tracker.bucket.Bucket;
 import practice.budget_tracker.exceptions.BadRequestException;
 
 import java.math.BigDecimal;
@@ -22,6 +23,11 @@ public class ExpenseService {
             throw new EntityNotFoundException("No expenses found");
         }
         return expenses;
+    }
+
+    public Expense findExpenseById(Long id){
+        return expenseRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Expense with id " + id + " not found"));
     }
 
     public List<Expense> getExpensesByCategory(String category) {

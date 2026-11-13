@@ -24,6 +24,11 @@ public class BucketService {
         return bucketRepository.findAll();
     }
 
+    public Bucket findBucketById(Long id){
+            return bucketRepository.findById(id)
+                    .orElseThrow(()-> new EntityNotFoundException("Bucket with id " + id + " not found"));
+    }
+
     public Bucket addBucket(Bucket bucket) {
 
         if(bucket.getBucketName() == null || bucket.getBucketName().isBlank()) {
@@ -65,19 +70,6 @@ public class BucketService {
             }
             bucketToUpdate.setBucketName(newName.trim());
         }
-
-//        if(newBucket.getBucketName() == null || newBucket.getBucketName().isBlank()){
-//            bucketToUpdate.setBucketName(bucketRepository.findById(id).get().getBucketName());
-//        } else{
-//            if(!bucketToUpdate.getBucketName().equals(newBucket.getBucketName())){
-//                bucketToUpdate.setBucketName(newBucket.getBucketName().trim());
-//            }
-//            if(bucketRepository.existsByBucketNameIgnoreCase(bucketToUpdate.getBucketName())) {
-//                throw new BadRequestException("Bucket with this name already exists");
-//            }
-//        }
-
-
 
         if(newBucket.getCurrentBalance() == null){
             bucketToUpdate.setCurrentBalance(bucketRepository.findById(id).get().getCurrentBalance());

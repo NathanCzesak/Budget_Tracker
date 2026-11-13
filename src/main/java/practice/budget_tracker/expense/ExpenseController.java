@@ -21,19 +21,16 @@ public class ExpenseController {
     }
 
     @GetMapping("/{category}")
-    public List<Expense> getExpensesByCategory(@PathVariable String category){
-        return expenseService.getExpensesByCategory(category);
-    }
+    public List<Expense> getExpensesByCategory(@PathVariable String category){ return expenseService.getExpensesByCategory(category); }
+
+    @GetMapping("/{id}")
+    public Expense getExpenseById(@PathVariable Long id){ return expenseService.findExpenseById(id); }
 
     @PostMapping
-    public Expense addExpense(@Valid @RequestBody Expense expense){
-        return expenseService.addExpense(expense);
-    }
+    public Expense addExpense(@Valid @RequestBody Expense expense){ return expenseService.addExpense(expense); }
 
     @PutMapping("/{id}")
-    public Expense updateExpense(@PathVariable Long id, @RequestBody Expense expense){
-        return expenseService.updateExpense(id, expense);
-    }
+    public Expense updateExpense(@PathVariable Long id, @RequestBody Expense expense){ return expenseService.updateExpense(id, expense); }
 
     @DeleteMapping("/{id}")
     public void deleteExpense(@PathVariable Long id){

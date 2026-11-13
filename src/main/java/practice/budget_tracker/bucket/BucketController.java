@@ -19,15 +19,16 @@ public class BucketController {
         return bucketService.listAllBuckets();
     }
 
+    @GetMapping("/{id}")
+    public Bucket findBucketById(@PathVariable Long id) { return bucketService.findBucketById(id); }
+
     @PostMapping()
     public Bucket addBucket(@RequestBody Bucket bucket) {
         return bucketService.addBucket(bucket);
     }
 
     @PutMapping("/{id}")
-    public Bucket updateBucket(@PathVariable Long id, @RequestBody Bucket bucket) {
-        return bucketService.updateBucket(id, bucket);
-    }
+    public Bucket updateBucket(@PathVariable Long id, @RequestBody Bucket bucket) { return bucketService.updateBucket(id, bucket); }
 
     @DeleteMapping("/{id}")
     public void deleteBucket(@PathVariable Long id) {
